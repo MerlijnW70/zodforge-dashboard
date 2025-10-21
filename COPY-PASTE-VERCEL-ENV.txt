@@ -1,0 +1,93 @@
+==============================================================================
+VERCEL ENVIRONMENT VARIABLES - COPY-PASTE READY
+==============================================================================
+
+Go to: https://vercel.com/merlijns-projects-2bec6ba7/zodforge-dashboard/settings/environment-variables
+
+Add these 5 variables (click "Add New" for each):
+
+------------------------------------------------------------------------------
+Variable 1:
+------------------------------------------------------------------------------
+Key: GITHUB_ID
+Value: <paste your GitHub OAuth Client ID>
+
+Where to get:
+1. Go to https://github.com/settings/developers
+2. Click your "ZodForge Dashboard" OAuth app
+3. Copy the "Client ID"
+
+------------------------------------------------------------------------------
+Variable 2:
+------------------------------------------------------------------------------
+Key: GITHUB_SECRET
+Value: <paste your GitHub OAuth Client Secret>
+
+Where to get:
+1. Same GitHub OAuth app page
+2. Click "Generate a new client secret"
+3. Copy the secret (shown only once!)
+
+------------------------------------------------------------------------------
+Variable 3:
+------------------------------------------------------------------------------
+Key: NEXT_PUBLIC_SUPABASE_URL
+Value: <paste your Supabase Project URL>
+
+Where to get:
+1. Go to https://app.supabase.com
+2. Select your project
+3. Settings → API → Project URL
+4. Copy the URL (looks like: https://xxxxx.supabase.co)
+
+------------------------------------------------------------------------------
+Variable 4:
+------------------------------------------------------------------------------
+Key: SUPABASE_SERVICE_KEY
+Value: <paste your Supabase service_role key>
+
+Where to get:
+1. Same Supabase project
+2. Settings → API → "service_role" section
+3. Click "Reveal" to show the key
+4. Copy the entire key (starts with eyJhbGciOi...)
+
+⚠️  Use "service_role" NOT "anon" key!
+
+------------------------------------------------------------------------------
+Variable 5:
+------------------------------------------------------------------------------
+Key: ZODFORGE_ADMIN_API_KEY
+Value: <paste the admin API key you generated>
+
+Where to get:
+Run this command in zodforge-api directory:
+
+cd C:\json2ts-generator\zodforge-api
+npx tsx -e "import { createApiKey } from './dist/lib/jwt-keys.js'; const key = createApiKey('system', 'Admin Key for Dashboard', 'enterprise', { permissions: ['admin'], expiresIn: 0 }); console.log('Admin API Key:', key);"
+
+Copy the output (starts with zf_enterprise_...)
+
+==============================================================================
+
+IMPORTANT SETTINGS FOR EACH VARIABLE:
+- ✅ Check "Production"
+- ✅ Check "Preview"
+- ✅ Check "Development"
+- Click "Save"
+
+==============================================================================
+
+AFTER ADDING ALL VARIABLES:
+1. Trigger new deployment: vercel --prod
+2. Or push to GitHub: git push origin main (auto-deploys)
+3. Test at: https://zodforge-dashboard.vercel.app
+
+==============================================================================
+
+EXISTING VARIABLES (Already configured):
+✅ NEXTAUTH_SECRET=6Px0ZFGM3oo0N/EUf4fB9lN2SkwCJieGVZol0nhLEQ0=
+✅ NEXTAUTH_URL=https://zodforge-dashboard.vercel.app
+✅ NEXT_PUBLIC_API_URL=https://web-production-f15d.up.railway.app
+
+==============================================================================
