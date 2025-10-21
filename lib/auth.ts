@@ -9,7 +9,8 @@ interface GitHubProfile {
   id: string;
   email: string;
   name: string;
-  avatar_url: string;
+  avatar_url?: string;
+  [key: string]: unknown;
 }
 
 export const authConfig: NextAuthConfig = {
@@ -54,7 +55,7 @@ export const authConfig: NextAuthConfig = {
             id: profile.id as string,
             email: profile.email as string,
             name: profile.name as string,
-            avatar_url: (profile as GitHubProfile).avatar_url,
+            avatar_url: (profile as GitHubProfile).avatar_url || undefined,
           });
 
           // Check if user has API keys
@@ -71,7 +72,7 @@ export const authConfig: NextAuthConfig = {
                   githubId: profile.id,
                   email: profile.email,
                   name: profile.name,
-                  avatarUrl: (profile as GitHubProfile).avatar_url,
+                  avatarUrl: (profile as GitHubProfile).avatar_url || undefined,
                   tier: 'free',
                 }),
               }
@@ -102,7 +103,7 @@ export const authConfig: NextAuthConfig = {
               id: profile!.id as string,
               email: profile!.email as string,
               name: profile!.name as string,
-              avatar_url: (profile as GitHubProfile)?.avatar_url,
+              avatar_url: (profile as GitHubProfile)?.avatar_url || undefined,
             });
 
             const apiKeys = await getUserApiKeys(dbUser.id);
