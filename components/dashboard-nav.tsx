@@ -69,11 +69,13 @@ export function DashboardNav({ session }: DashboardNavProps) {
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-600 to-cyan-600 flex items-center justify-center">
                 <span className="text-white font-semibold">
-                  {session.user.name?.[0]?.toUpperCase() || 'U'}
+                  {session.user.name?.[0]?.toUpperCase() || session.user.email?.[0]?.toUpperCase() || 'U'}
                 </span>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-white truncate">{session.user.name}</p>
+                <p className="text-sm font-medium text-white truncate">
+                  {session.user.name || session.user.email || 'User'}
+                </p>
                 <p className="text-xs text-gray-400 capitalize">{session.user.tier} Plan</p>
               </div>
             </div>

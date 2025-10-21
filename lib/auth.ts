@@ -38,6 +38,8 @@ export const authConfig: NextAuthConfig = {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         token.tier = (user as any).tier;
         token.kid = user.id;
+        token.name = user.name;
+        token.email = user.email;
       }
       return token;
     },
@@ -46,6 +48,8 @@ export const authConfig: NextAuthConfig = {
         session.user.apiKey = token.apiKey as string;
         session.user.tier = token.tier as string;
         session.user.kid = token.kid as string;
+        session.user.name = token.name as string;
+        session.user.email = token.email as string;
       }
       return session;
     },
