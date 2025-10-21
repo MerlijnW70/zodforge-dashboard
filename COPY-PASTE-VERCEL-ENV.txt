@@ -32,13 +32,9 @@ Where to get:
 Variable 3:
 ------------------------------------------------------------------------------
 Key: NEXT_PUBLIC_SUPABASE_URL
-Value: <paste your Supabase Project URL>
+Value: https://lnmkkpgzjdavkehxeihs.supabase.co
 
-Where to get:
-1. Go to https://app.supabase.com
-2. Select your project
-3. Settings → API → Project URL
-4. Copy the URL (looks like: https://xxxxx.supabase.co)
+✅ Already configured - use this value exactly
 
 ------------------------------------------------------------------------------
 Variable 4:
@@ -64,7 +60,7 @@ Where to get:
 Run this command in zodforge-api directory:
 
 cd C:\json2ts-generator\zodforge-api
-npx tsx -e "import { createApiKey } from './dist/lib/jwt-keys.js'; const key = createApiKey('system', 'Admin Key for Dashboard', 'enterprise', { permissions: ['admin'], expiresIn: 0 }); console.log('Admin API Key:', key);"
+npx tsx -e "import { createApiKey } from './src/lib/jwt-keys.js'; const key = createApiKey('system', 'Admin Key for Dashboard', 'enterprise', { permissions: ['admin'], expiresIn: 0 }); console.log('Admin API Key:', key);"
 
 Copy the output (starts with zf_enterprise_...)
 

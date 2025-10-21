@@ -13,12 +13,9 @@
 
 ## Step 1: Set Up Supabase Database (2 minutes)
 
-### 1.1 Create/Access Supabase Project
-1. Go to: https://app.supabase.com
-2. Either use existing project or create new one
-3. Wait for project to be ready
+✅ **Your Supabase Project**: https://lnmkkpgzjdavkehxeihs.supabase.co
 
-### 1.2 Run Database Migration
+### 1.1 Run Database Migration
 1. In Supabase dashboard → Click **SQL Editor** (left sidebar)
 2. Click **New Query**
 3. Copy the entire contents of `supabase-users-schema.sql`
@@ -26,12 +23,12 @@
 5. Click **RUN** (bottom right)
 6. ✅ You should see "Success. No rows returned"
 
-### 1.3 Get Supabase Credentials
-1. In Supabase dashboard → Click **Settings** (gear icon, left sidebar)
-2. Click **API** (under Settings)
-3. Copy these two values:
-   - **Project URL** (looks like: `https://xxxxx.supabase.co`)
-   - **service_role secret** (under "Project API keys" section - click "Reveal" if hidden)
+### 1.2 Get Supabase Service Key
+1. Go to: https://supabase.com/dashboard/project/lnmkkpgzjdavkehxeihs/settings/api
+2. Scroll to **"Project API keys"** section
+3. Find **"service_role"** key
+4. Click **"Reveal"** to show the key
+5. **Copy the entire key** (starts with `eyJhbGciOi...`)
 
 ---
 
@@ -61,10 +58,10 @@ Run this command in your **zodforge-api** directory:
 
 ```bash
 cd C:\json2ts-generator\zodforge-api
-npx tsx -e "import { createApiKey } from './dist/lib/jwt-keys.js'; const key = createApiKey('system', 'Admin Key for Dashboard', 'enterprise', { permissions: ['admin'], expiresIn: 0 }); console.log('Admin API Key:', key);"
+npx tsx -e "import { createApiKey } from './src/lib/jwt-keys.js'; const key = createApiKey('system', 'Admin Key for Dashboard', 'enterprise', { permissions: ['admin'], expiresIn: 0 }); console.log('Admin API Key:', key);"
 ```
 
-**Copy the output** (starts with `zf_`)
+**Copy the output** (starts with `zf_enterprise_`)
 
 ---
 
@@ -78,8 +75,8 @@ npx tsx -e "import { createApiKey } from './dist/lib/jwt-keys.js'; const key = c
 |-----|-------|------|
 | `GITHUB_ID` | `<paste Client ID from Step 2.2>` | From GitHub OAuth app |
 | `GITHUB_SECRET` | `<paste Client Secret from Step 2.2>` | From GitHub OAuth app |
-| `NEXT_PUBLIC_SUPABASE_URL` | `<paste Project URL from Step 1.3>` | From Supabase settings |
-| `SUPABASE_SERVICE_KEY` | `<paste service_role from Step 1.3>` | From Supabase API settings |
+| `NEXT_PUBLIC_SUPABASE_URL` | `https://lnmkkpgzjdavkehxeihs.supabase.co` | Your Supabase project URL |
+| `SUPABASE_SERVICE_KEY` | `<paste service_role from Step 1.2>` | From Supabase API settings |
 | `ZODFORGE_ADMIN_API_KEY` | `<paste API key from Step 3>` | Generated via npx command |
 
 3. For each variable, ensure "Production", "Preview", and "Development" are all checked
