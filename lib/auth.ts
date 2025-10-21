@@ -4,6 +4,14 @@ import GitHub from 'next-auth/providers/github';
 import { verifyApiKey } from './api-client';
 import { findOrCreateUser, getUserApiKeys } from './supabase';
 
+// GitHub profile type
+interface GitHubProfile {
+  id: string;
+  email: string;
+  name: string;
+  avatar_url: string;
+}
+
 export const authConfig: NextAuthConfig = {
   providers: [
     GitHub({
@@ -37,7 +45,7 @@ export const authConfig: NextAuthConfig = {
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile }) {
+    async signIn({ account, profile }) {
       // For GitHub OAuth, ensure user has an API key
       if (account?.provider === 'github' && profile) {
         try {
@@ -46,7 +54,7 @@ export const authConfig: NextAuthConfig = {
             id: profile.id as string,
             email: profile.email as string,
             name: profile.name as string,
-            avatar_url: (profile as any).avatar_url,
+            avatar_url: (profile as GitHubProfile).avatar_url,
           });
 
           // Check if user has API keys
@@ -63,7 +71,7 @@ export const authConfig: NextAuthConfig = {
                   githubId: profile.id,
                   email: profile.email,
                   name: profile.name,
-                  avatarUrl: (profile as any).avatar_url,
+                  avatarUrl: (profile as GitHubProfile).avatar_url,
                   tier: 'free',
                 }),
               }
@@ -94,22 +102,12 @@ export const authConfig: NextAuthConfig = {
               id: profile!.id as string,
               email: profile!.email as string,
               name: profile!.name as string,
-              avatar_url: (profile as any)?.avatar_url,
+              avatar_url: (profile as GitHubProfile)?.avatar_url,
             });
 
             const apiKeys = await getUserApiKeys(dbUser.id);
 
             if (apiKeys.length > 0) {
-              // Fetch the actual API key from the zodforge-api
-              const keyResponse = await fetch(
-                `${process.env.NEXT_PUBLIC_API_URL}/api/v1/api-keys/me`,
-                {
-                  headers: {
-                    Authorization: `Bearer ${process.env.ZODFORGE_ADMIN_API_KEY}`,
-                  },
-                }
-              );
-
               token.kid = apiKeys[0].kid;
               token.tier = apiKeys[0].tier;
               token.userId = dbUser.id;
