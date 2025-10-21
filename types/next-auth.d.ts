@@ -10,6 +10,8 @@ declare module 'next-auth' {
       apiKey: string;
       tier: string;
       kid: string;
+      userId?: string;
+      loginMethod?: 'github' | 'apikey';
     };
   }
 
@@ -24,5 +26,7 @@ declare module 'next-auth/jwt' {
     apiKey: string;
     tier: string;
     kid: string;
+    userId?: string;
+    loginMethod?: string;
   }
 }
